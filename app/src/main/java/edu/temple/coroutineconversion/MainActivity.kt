@@ -18,10 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var cakeImageView: ImageView
 
-    val handler = Handler(Looper.getMainLooper(), Handler.Callback {
-        cakeImageView.alpha = it.what / 100f
-        true
-    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     suspend fun fadeImage(){
         repeat(100) {
-            handler.sendEmptyMessage(it)
+            cakeImageView.alpha = it / 100f
             delay(40)
         }
     }
