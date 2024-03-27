@@ -9,6 +9,7 @@ import android.widget.ImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -32,13 +33,15 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.revealButton).setOnClickListener{
             scope.launch{
-                Thread{
-                    repeat(100) {
-                        handler.sendEmptyMessage(it)
-                        Thread.sleep(40)
-                    }
-                }.start()
+                fadeImage()
             }
+        }
+    }
+
+    suspend fun fadeImage(){
+        repeat(100) {
+            handler.sendEmptyMessage(it)
+            delay(40)
         }
     }
 }
